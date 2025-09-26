@@ -1,0 +1,446 @@
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #111;
+    font-family: monospace;
+    font-size: 3rem;
+    color: #00000077;
+  }
+
+  .glitch-text {
+    position: relative;
+    display: inline-block;
+  }
+
+  .glitch-letter {
+    position: relative;
+    display: inline-block;
+    animation: glitchMove 0.1s infinite;
+  }
+
+  /* Layered colors for glitch effect */
+  .glitch-letter::before,
+  .glitch-letter::after {
+    content: attr(data-char);
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0.8;
+  }
+
+  .glitch-letter::before {
+    color: rgb(0, 255, 255);
+    z-index: -1;
+  }
+
+
+  .glitch-letter::after {
+    color: rgb(255, 0, 149);
+    z-index: -1;
+  }
+
+  @keyframes glitchMove {
+    0% { transform: translate(0px, 0px); }
+    10% { transform: translate(-3px, 0px); }
+    20% { transform: translate(3px, -0px); }
+    30% { transform: translate(-3px, -0px); }
+    40% { transform: translate(3px, 0px); }
+    50% { transform: translate(-3px, 0px); }
+    60% { transform: translate(3px, -0px); }
+    70% { transform: translate(-3px, -0px); }
+    80% { transform: translate(3px, 0px); }
+    90% { transform: translate(-3px, 0px); }
+    100% { transform: translate(0px, 0px); }
+  }
+
+  .fade-out {
+    animation: fadeOut 0.2s forwards;
+  }
+
+  @keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div id="text" class="glitch-text">Hello</div><br>
+
+
+<script>
+const words = ["No_bullshit_ads", "No_Mediafire", "Free_Toolbox", "No_redirects_or_popups", "100%_FREE", "No_subtounlock", "Direct_downloads", "Safe_sources", "100% Legit", "Screenshots_of_proof", "Quack_Quack", "Save_time", "Good_UI", "My youtube @toolboxfr", "My tiktok @rafi_hacker_2025"];
+let index = 0;
+const textEl = document.getElementById("text");
+
+// Characters for random glitch
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+// Wrap each letter in a span for individual glitch
+function wrapLetters(word) {
+  return word.split('').map(c => `<span class="glitch-letter" data-char="${c}">${c}</span>`).join('');
+}
+
+// Randomly scramble letters
+function glitchLetters() {
+  document.querySelectorAll('.glitch-letter').forEach(letter => {
+    if (Math.random() < 0.3) {
+      letter.textContent = chars[Math.floor(Math.random() * chars.length)];
+    } else {
+      letter.textContent = letter.getAttribute('data-char');
+    }
+  });
+}
+
+// Change the word with glitch effect
+function changeWord() {
+  let glitchInterval = setInterval(glitchLetters, 30);
+
+  // Fade out after a short glitch
+  setTimeout(() => {
+    clearInterval(glitchInterval);
+    textEl.classList.add('fade-out');
+  }, 600);
+
+  // Update word after fade
+  setTimeout(() => {
+    index = (index + 1) % words.length;
+    textEl.innerHTML = wrapLetters(words[index]);
+    textEl.classList.remove('fade-out');
+  }, 1100);
+}
+
+// Initialize first word
+textEl.innerHTML = wrapLetters(words[index]);
+
+// Change word every 2 seconds
+setInterval(changeWord, 2000);
+</script>
+
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Toolbox Mod MCPE Card</title>
+  
+  <style>
+body {
+  background: #000000;
+  display: flex;
+  flex-wrap: wrap;       /* allow wrapping */
+  justify-content: center; /* 🔹 center rows horizontally */
+  align-content: flex-start; /* 🔹 stack rows from the top */
+  gap: 10px;             /* consistent spacing */
+  padding: 20px;         /* padding around the grid */
+  margin: 0;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;     /* fill screen height */
+  box-sizing: border-box;
+}
+
+
+.lineseperator {
+  background: var(--bg-color, #1a1a1a);
+  border-radius: 0px;
+  overflow: hidden;
+  width: 100%;
+  min-width: 0px;
+  height: 0px;
+  display: flex;
+  flex-direction: column;
+  border: 0px solid #1a1a1a;
+  transform: scale(0);
+  position: relative;
+  z-index: 0;
+}
+
+.card {
+  background: var(--bg-color, #1a1a1a);
+  border-radius: 10px;
+  overflow: hidden;
+  width: 407px;
+  min-width: 407px;
+  height: 282px;
+  display: flex;
+  flex-direction: column;
+  border: 3px solid #1a1a1a;
+  transform: scale(0.97);
+  position: relative;
+  z-index: 9999;
+
+  /* Custom glow color variable */
+  --glow-color: rgba(255, 255, 255, 0.47);
+
+  /* Default glow */
+  box-shadow: 0 0 10px 2px var(--glow-color);
+
+  /* Smooth transform & glow transition */
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Scale from center */
+  transform-origin: center center;
+}
+
+/* Hover effect: scale up + brighter glow */
+.card:hover {
+  transform: scale(1.02);
+
+  /* Brighter glow using same color variable */
+  box-shadow: 0 0 20px 11px var(--glow-color);
+}
+
+
+
+
+    .screenshot {
+      background: #00000000;
+      height: 2100px;
+      border-radius: 10px;
+      margin: 10px;
+      z-index:10;
+    }
+
+    .footer {
+      display: flex;
+      align-items: center;
+      background: var(--bg-color, #1a1a1a);
+      padding: 6px 8px 8px 8px;
+      gap: 16px;
+      z-index:10;
+    }
+
+    .icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 10px;
+      background: #00000000; /* green */
+      flex-shrink: 0;
+      z-index:10;
+      position: sticky;
+      margin-top: -50px;
+    }
+
+    .title {
+      color: #fff;
+      font-size: 20px;
+      font-weight: bold;
+      position: absolute;
+      flex-grow: 1;
+      margin-left: 75px;
+      margin-right: 0px;
+      margin-bottom: 87px;
+      margin-top: 0px;
+      z-index:10;
+      
+    }
+
+    .btn {
+      background: var(--btn-bg, #3a3a3a); /* default background */
+      color: var(--btn-color, #fff);       /* default text color */
+      padding: 7px 10px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 11px;
+      cursor: pointer;
+      transition: background 0.2s;
+      min-width: 149px;
+      margin: auto;
+      margin-TOP: 30px;
+      z-index:10;
+    }
+
+    .btn:hover {
+      background: var(--btn-hover, #555); /* default hover */
+    }
+
+    .btn-download {
+      min-width: 180px;
+      margin: auto;
+      margin-right: -183px;
+      margin-left: -13px;
+      margin-bottom: 0px;
+      z-index:10;
+    }
+    
+      .btn-download2 {
+      min-width: 149px;
+      margin: auto;
+      margin-TOP: 30px;
+      z-index:10;
+    }
+
+    /* Customizable colors for btn-download2 buttons */
+.btn-download2 {
+  --btn-bg: #3a3a3a;      /* default background */
+  --btn-hover: #555;       /* default hover background */
+  --btn-color: #fff;       /* default text color */
+  background: var(--btn-bg);
+  color: var(--btn-color);
+  padding: 7px 10px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 11px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-download2:hover {
+  background: var(--btn-hover);
+}
+
+
+    .btn-mcpe {
+      min-width: 420px;
+      text-align: center;
+      margin: auto;
+      margin-left: 0px;
+      margin-bottom: 0px;
+      z-index:10;
+    }
+
+    .btn[downloading="true"] {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+  </style>
+
+</head><body><div class="lineseperator"></div></body></html>
+
+</head><body><div class="card" style="--glow-color: #4700b4; --bg-color: #160036">
+<div class="screenshot"><img style="display: block; border-radius: 10px;" src="https://media.githubusercontent.com/media/rafihacker025/TOOLIFYXD/refs/heads/main/images/toolbox_1_SCREENSHOT.jpg" height="188px" width="auto"></div><div class="footer">
+<div class="icon"><img style="display: block; border-radius: 10px;" src="https://media.githubusercontent.com/media/rafihacker025/TOOLIFYXD/refs/heads/main/images/toolbox_1.png" height="60px" width="60px"></div>
+<div class="title" style="color:#ffffff">TOOLBOX ζ GALAXY</div>
+<form method="get" action="https://github.com/rafihacker025/TOOLIFYXD/raw/refs/heads/main/toolboxez/Toolbox_1.21.101+%20%201%20TOOLBOX%20ζ%20GALAXY.apk?download="><button type="submit" class="btn" style="--btn-bg: #4700b4; --btn-hover: #6600ff; --btn-color: #ffffff">TOOLBOX</button></form>
+<form method="get" action="https://dl.mcpelife.com/minecraft-pe/1-20-51-01/minecraft-1-20-51-01-arm64-v8a-xbox-servers.apk"><button type="submit" class="btn" style="--btn-bg: #4700b4; --btn-hover: #4da541; --btn-color: #ffffff" >MCPE 1.20.51.01</button></form></div></div></body></html>
+
+</head><body><div class="card" style="--glow-color: #4700b4; --bg-color: #160036">
+<div class="screenshot"><img style="display: block; border-radius: 10px;" src="https://media.githubusercontent.com/media/rafihacker025/TOOLIFYXD/refs/heads/main/images/toolbox_2_SCREENSHOT.jpg" height="188px" width="auto"></div><div class="footer">
+<div class="icon"><img style="display: block; border-radius: 10px;" src="https://media.githubusercontent.com/media/rafihacker025/TOOLIFYXD/refs/heads/main/images/toolbox_2.png" height="60px" width="60px"></div>
+<div class="title" style="color:#ffffff">TOOLBOX ζ SYTHE</div>
+<form method="get" action="https://github.com/rafihacker025/TOOLIFYXD/raw/refs/heads/main/toolboxez/Toolbox_1.21.101+%20%202%20TOOLBOX%20ζ%20SYTHE.apk?download="><button type="submit" class="btn" style="--btn-bg: #4700b4; --btn-hover: #6600ff; --btn-color: #ffffff">TOOLBOX</button></form>
+<form method="get" action="https://dl.mcpelife.com/minecraft-pe/1-20-51-01/minecraft-1-20-51-01-arm64-v8a-xbox-servers.apk"><button type="submit" class="btn" style="--btn-bg: #4700b4; --btn-hover: #4da541; --btn-color: #ffffff" >MCPE 1.20.51.01</button></form></div></div></body></html>
+
+</head><body><div class="card" style="--glow-color: rgba(255, 255, 255, 0.432); --bg-color: #1a1a1a">
+<div class="screenshot"><img style="display: block; border-radius: 10px;" src="https://media.githubusercontent.com/media/rafihacker025/TOOLIFYXD/refs/heads/main/images/test.jpg" height="188px" width="auto"></div><div class="footer">
+<div class="icon"><img style="display: block; border-radius: 10px;" src="https://media.githubusercontent.com/media/rafihacker025/TOOLIFYXD/refs/heads/main/images/test_ico.png" height="60px" width="60px"></div>
+<div class="title" style="color:#ffffff">TOOLBOX MOD MCPE</div>
+<form method="get" action="https://work.ink/direct/1526"><button type="submit" class="btn" style="--btn-bg: #3a3a3a; --btn-hover: #555555; --btn-color: #ffffff">TOOLBOX</button></form>
+<form method="get" action="https://work.ink/direct/1526"><button type="submit" class="btn" style="--btn-bg: #3a3a3a; --btn-hover: #555555; --btn-color: #ffffff" >MCPE 1.21.120.23</button></form></div></div></body></html>
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    html,body{height:100%;margin:0;background:#000;overflow:hidden}
+    canvas#snowCanvas{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      display:block;
+      z-index:1; /* behind page content */
+      pointer-events:none;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="snowCanvas" aria-hidden="true"></canvas>
+  <script>
+    (() => {
+      const canvas = document.getElementById('snowCanvas');
+      const ctx = canvas.getContext('2d');
+
+      let DPR = Math.max(1, window.devicePixelRatio || 1);
+      let width = 0, height = 0;
+
+      const particles = [];
+      const config = {
+        density: 1.2,
+        baseSpeed: 1.2,
+        baseSize: 3.0,
+        wind: 0,
+        maxParticles: 4000
+      };
+
+      function resize() {
+        DPR = Math.max(1, window.devicePixelRatio || 1);
+        width = Math.floor(window.innerWidth);
+        height = Math.floor(window.innerHeight);
+        canvas.width = width * DPR;
+        canvas.height = height * DPR;
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+        ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+
+        const target = Math.min(config.maxParticles, Math.floor((width * height) / 6000 * config.density));
+        while (particles.length < target) particles.push(create());
+        while (particles.length > target) particles.pop();
+      }
+
+      function create(y = Math.random() * height) {
+        const size = Math.random() * config.baseSize + 1.2;
+        return {
+          x: Math.random() * width,
+          y: y,
+          r: size,
+          vy: (Math.random() * 0.6 + 0.4) * (config.baseSpeed * (0.6 + size / 4)),
+          vx: (Math.random() * 0.6 - 0.3),
+          ang: Math.random() * Math.PI * 2,
+          swing: Math.random() * 0.6 + 0.2,
+          a: Math.random() * 0.6 + 0.35
+        };
+      }
+
+      let lastTime = performance.now();
+      function frame(now) {
+        const dt = Math.min(50, now - lastTime) / 16.6667;
+        lastTime = now;
+
+        ctx.clearRect(0, 0, width, height);
+
+        config.wind = Math.sin(now / 7000) * 0.4;
+
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          p.ang += 0.01 * p.swing * dt;
+          const sway = Math.sin(p.ang) * (p.swing * 8 + config.wind * 10);
+          p.x += (p.vx + config.wind * 0.15 + sway * 0.02) * dt;
+          p.y += p.vy * dt;
+
+          if (p.y - p.r > height) {
+            particles[i] = create(-10);
+            particles[i].x = Math.random() * width;
+            continue;
+          }
+
+          if (p.x < -20) p.x = width + 20;
+          if (p.x > width + 20) p.x = -20;
+
+          ctx.beginPath();
+          ctx.arc(Math.round(p.x) + 0.5, Math.round(p.y) + 0.5, p.r, 0, Math.PI * 2);
+          ctx.shadowBlur = Math.max(0, p.r * 0.8);
+          ctx.shadowColor = 'rgba(230,245,255,' + (p.a * 0.8) + ')';
+          ctx.fillStyle = 'rgba(245,255,255,' + p.a + ')';
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        }
+
+        requestAnimationFrame(frame);
+      }
+
+      window.addEventListener('resize', resize);
+      resize();
+      requestAnimationFrame(frame);
+    })();
+  </script>
+</body>
+</html>
